@@ -38,7 +38,13 @@ def _pandas_date(df, dates):
 
 
 def _pandas_current_month(df):
+    '''
+    get df rows with dateranges
+    :param df:
+    :return:
+    '''
     n = _dt.datetime.now()
+    # date中日从1开始
     daterange = _pd.date_range(_dt.date(n.year, n.month, 1), n)
     return df[df.index.isin(daterange)]
 

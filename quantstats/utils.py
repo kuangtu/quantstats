@@ -26,6 +26,12 @@ from . import stats as _stats
 
 
 def _pandas_date(df, dates):
+    '''
+    get df rows with datas
+    :param df:
+    :param dates:
+    :return:
+    '''
     if not isinstance(dates, list):
         dates = [dates]
     return df[df.index.isin(dates)]

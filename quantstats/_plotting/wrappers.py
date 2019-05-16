@@ -67,19 +67,24 @@ def snapshot(returns, grayscale=False, figsize=(10, 8),
         size = list(_plt.gcf().get_size_inches())
         figsize = (size[0], size[0]*.75)
 
+    # 创建了三个子图
     fig, axes = _plt.subplots(3, 1, sharex=True,
                               figsize=figsize,
                               gridspec_kw={'height_ratios': [3, 1, 1]})
 
+    # title信息
     fig.suptitle(title, fontsize=14, y=.995,
                  fontname=fontname, fontweight='bold', color='black')
 
     fig.set_facecolor('white')
 
+    # 设置子坐标title等信息
     if subtitle:
         axes[0].set_title("\n%s - %s ;  Sharpe: %.2f                      " % (
+            # 第一个交易日和最后一个交易日
             returns.index.date[:1][0].strftime('%e %b \'%y'),
             returns.index.date[-1:][0].strftime('%e %b \'%y'),
+            # 计算了sharpe值
             _stats.sharpe(returns)
         ), fontsize=12, color='gray')
 

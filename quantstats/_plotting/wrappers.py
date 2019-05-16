@@ -88,12 +88,15 @@ def snapshot(returns, grayscale=False, figsize=(10, 8),
             _stats.sharpe(returns)
         ), fontsize=12, color='gray')
 
+    # 绘制累计收益率
     axes[0].set_ylabel('Cumulative Return', fontname=fontname,
                        fontweight='bold', fontsize=12)
     axes[0].plot(returns.cumsum() * 100, color=colors[1],
                  lw=1 if grayscale else lw, zorder=1)
+    # axhline水平线
     axes[0].axhline(0, color='silver', lw=1, zorder=0)
 
+    # 最大回撤？
     dd = _stats.to_drawdown_series(returns) * 100
     ddmin = _utils._round_to_closest(abs(dd.min()), 5)
     ddmin_ticks = 5
@@ -110,6 +113,7 @@ def snapshot(returns, grayscale=False, figsize=(10, 8),
     axes[1].plot(dd, color=colors[2], lw=1 if grayscale else 1, zorder=1)
     axes[1].axhline(0, color='silver', lw=1, zorder=0)
     if not grayscale:
+        # 填充颜色等
         axes[1].fill_between(dd.index, 0, dd, color=colors[2], alpha=.1)
 
     axes[2].set_ylabel('Daily Return', fontname=fontname,
